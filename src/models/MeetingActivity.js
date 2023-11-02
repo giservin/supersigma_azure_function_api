@@ -23,6 +23,11 @@ const MeetingActivity = sequelizeMeeting.define('meeting_activity', {
   end: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  checked_in: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: true
   }
 }, {
   tableName: 'meeting_activity', // Set the table name to match the actual table name
