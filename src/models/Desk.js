@@ -15,6 +15,10 @@ const Desk = sequelize.define('desk', {
   location: {
     type: DataTypes.STRING(20),
     allowNull: false
+  },
+  floor: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 }, {
   tableName: 'desk', // Set the table name to match the actual table name
