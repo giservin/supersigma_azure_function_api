@@ -52,7 +52,7 @@ module.exports = async (request, context) => {
                         await notificationRecipient.addNotification(queueName, {cancelStatus: true, checkIn: false, meetingDetails: meeting});
 
                     }
-                    return meeting.checked_in
+                    else return meeting
                 }
                 return meeting
             });

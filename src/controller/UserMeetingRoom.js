@@ -8,9 +8,13 @@ module.exports = async (request, context) => {
     context.log(`Http function processed request for url "${request.url}"`);
 
     const { organizer, current_time } = await request.json();
-    const today_offset = DateTime.now().setZone('Asia/Bangkok').startOf('day');
-    const tomorrow_offset = today_offset.plus({days: 1});
-    const currentTime = DateTime.fromISO(current_time)
+    // const today_offset = DateTime.now().setZone('Asia/Bangkok').startOf('day');
+
+    const currentTime = DateTime.fromISO(current_time);
+    const today_offset = currentTime.minus({days: 1});
+    const tomorrow_offset = currentTime.plus({days: 1});
+    console.log(today_offset.toISO());
+    console.log(tomorrow_offset.toISO())
     try {
         const CurrentMeeting = await MeetingActivity.findAll(
             {
@@ -33,8 +37,8 @@ module.exports = async (request, context) => {
             }
         }
         const ImminentMeeting = CurrentMeeting.filter(meeting => {
-            let duration = DateTime.fromJSDate(meeting.end).diff(DateTime.fromJSDate(meeting.start)).minutes
-            if(duration >= 15) duration = 15;
+            let duration = DateTime.fromJSDate(meeting.end).diff(DateTime.fromJSDate(meeting.start))
+            if(duration.as("minutes") >= 15) duration = 15;
             return currentTime >= DateTime.fromJSDate(meeting.start) && 
                    currentTime <= DateTime.fromJSDate(meeting.start).plus({minutes: duration})
         });
