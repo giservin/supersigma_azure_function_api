@@ -74,6 +74,7 @@ module.exports = async (request, context) => {
         }
         // if gak ketemu, maka akan membalikan status available, if ketemu
     } catch (error) {
+        context.log(`error in ${request.url} : ${error}`);
         return {
             headers: { "Content-Type": "application/json"},
             status: 500,

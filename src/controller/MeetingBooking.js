@@ -49,6 +49,7 @@ module.exports = async (request, context) => {
             body: JSON.stringify({ message: 'Booking created successfully', bookedStatus: false})
         }
     } catch (error) {
+        context.log(`error in ${request.url} : ${error}`);
         return {
             headers: { "Content-Type": "application/json"},
             status: 500,

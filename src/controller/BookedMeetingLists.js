@@ -24,6 +24,7 @@ module.exports = async (request, context) => {
             body: JSON.stringify(list_booked_meeting)
         }
     } catch(err) {
+        context.log(`error in ${request.url} : ${err}`);
         return {
             headers: { "Content-Type": "application/json"},
             status: 500,

@@ -50,6 +50,7 @@ module.exports = async (request, context) => {
             body: JSON.stringify({ message: 'Booking cancelled successfully' })
         }
     } catch (error) {
+        context.log(`error in ${request.url} : ${error}`);
         await t.rollback(); // Rollback the transaction if an error occurs
         return {
             headers: { "Content-Type": "application/json"},

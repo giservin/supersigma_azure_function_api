@@ -22,6 +22,7 @@ module.exports = async (request, context) => {
             }
         }
     } catch (error) {
+        context.log(`error in ${request.url} : ${error}`);
         return {
             headers: { "Content-Type": "application/json"},
             status: 500,

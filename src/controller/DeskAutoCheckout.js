@@ -24,6 +24,7 @@ module.exports = async (myTimer, context) => {
 
         await t.commit(); // Commit the transaction
     } catch (error) {
+        context.log(`error in ${request.url} : ${error}`);
         await t.rollback(); // Rollback the transaction if an error occurs
     }
 }
